@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:storybook/recommended"
+  ],
+  "rules": {
+    "max-len": ["warn", { "code": 500, "ignoreStrings": true, "ignoreComments": true }]
+  }
+}

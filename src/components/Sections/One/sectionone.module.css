@@ -1,0 +1,11 @@
+.backgroundSvg {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+
+    background-image: url('/imgs/svgoverlay.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
