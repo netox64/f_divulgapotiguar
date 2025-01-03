@@ -5,6 +5,7 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   sonarqube:
     name: SonarQube
@@ -12,52 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
           
-      - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22'
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '22'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests
-      run: npm test -- --coverage
+      - name: Run tests
+        run: npm test -- --coverage
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-
-
-
-
-
-
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run tests
-      run: npm test -- --coverage
-
-    - name: Run SonarQube analysis
-      run: |
-        npx sonar-scanner
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
