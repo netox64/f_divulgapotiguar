@@ -2,9 +2,21 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ButtonRounded } from ".";
 
 const meta: Meta<typeof ButtonRounded> = {
-  title: "Components/ButtonRounded",
+  title: "Components/Buttons/ButtonRounded",
   component: ButtonRounded,
   tags: ["autodocs"],
+  argTypes: {
+    color: {
+      control: {
+        type: 'color',
+        presetColors: ["red","blue","green","yellow","pink","indigo","teal"]
+      },
+    },
+    action: {
+      options: ["click", "submit"],
+      control: { type: "radio" },
+    },
+  },
   parameters: {
     docs: {
       description: {
@@ -18,69 +30,31 @@ export default meta;
 type Story = StoryObj<typeof ButtonRounded>;
 
 export const Default: Story = {
-  render: () => (
-    <>
-      {" "}
-      <ButtonRounded label={"Red"} color={"red"} action="click" />
-      <ButtonRounded label={"Blue"} color={"blue"} action="click" />
-      <ButtonRounded label={"Green"} color={"green"} action="click" />
-      <ButtonRounded label={"Indigo"} color={"indigo"} action="click" />
-      <ButtonRounded label={"Pink"} color={"pink"} action="click" />
-      <ButtonRounded label={"Teal"} color={"teal"} action="click" />
-    </>
-  ),
+  args: {
+    color: "indigo",
+    label: "Indigo",
+    action: "click",
+  },
+
+  render: (args) => <ButtonRounded {...args}/>,
+
   parameters: {
     docs: {
       description: {
         story: `Esta história demonstra o **ButtonRounded** em várias cores sem o estilo de transparência.  Clique no botão para disparar a ação associada. Ideal para uso em botões de ação visualmente distintos.`,
       },
     },
-  },
+  }
 };
 
-// Exemplo de um botão transparente
 export const Transparent: Story = {
-  render: () => (
-    <>
-      {" "}
-      <ButtonRounded
-        label={"Red"}
-        color={"red"}
-        action="click"
-        transparent={true}
-      />
-      <ButtonRounded
-        label={"Blue"}
-        color={"blue"}
-        action="click"
-        transparent={true}
-      />
-      <ButtonRounded
-        label={"Green"}
-        color={"green"}
-        action="click"
-        transparent={true}
-      />
-      <ButtonRounded
-        label={"Indigo"}
-        color={"indigo"}
-        action="click"
-        transparent={true}
-      />
-      <ButtonRounded
-        label={"Pink"}
-        color={"pink"}
-        action="click"
-        transparent={true}
-      />
-      <ButtonRounded
-        label={"Teal"}
-        color={"teal"}
-        action="click"
-        transparent={true}
-      />
-    </>
-  ),
+  args: {
+    color: "indigo",
+    label: "Qualquer coisa",
+    transparent: true,
+    action: "click",
+  },
+  render: (args) => <ButtonRounded {...args} />,
   parameters: {
     docs: {
       description: {
@@ -90,14 +64,9 @@ export const Transparent: Story = {
   },
 };
 
-// Exemplo de um botão desabilitado
 export const Disabled: Story = {
   render: () => (
-    <ButtonRounded
-      label={"Salvar"}
-      color={"red"}
-      action="click"
-      disabled={true}
+    <ButtonRounded label={"Salvar"} color={"red"} action="click" disabled={true}
     />
   ),
   parameters: {
@@ -106,16 +75,5 @@ export const Disabled: Story = {
         story: `Este é um exemplo do **ButtonRounded** no estado **desabilitado**. Quando o botão está desabilitado, ele não responde a interações de clique e geralmente  apresenta um estilo visual diferente (como opacidade reduzida) para indicar que a ação não está disponível.`,
       },
     },
-  },
-};
-
-// Especificação adicional dos parâmetros (para ações, eventos e controle de props)
-Default.parameters = {
-  actions: {
-    handles: ["click", "submit"], // Definindo a ação do evento
-  },
-  controls: {
-    // Usando o controle de props para testar diferentes valores
-    expanded: "radio",
   },
 };

@@ -1,45 +1,33 @@
 "use client";
 
 import clsx from "clsx";
-import styles from "./buttonrounded.module.css";
+import Link from "next/link";
 
 export interface IButtonRoundedProps {
-  label: string;
+  label: string; transparent?: boolean; referencia: string; url: string;
   colorOne: "red" | "blue" | "green" | "yellow" | "pink" | "indigo" | "teal";
   colorTwo: "red" | "blue" | "green" | "yellow" | "pink" | "indigo" | "teal";
-  disabled?: boolean;
-  transparent?: boolean;
-  action: actions;
 }
 
-export type actions = "submit" | "click" | "log";
+export const ButtonRoundedLink = ({ colorOne, colorTwo, label, transparent = false, url, referencia }: IButtonRoundedProps) => {
+  const buttonClasses = clsx(
+    "min-w-[100px] lg:min-w-fit max-w-[200px] h-[50px] lg:px-[14px] py-[14px] inline-block rounded-full",
+    {
+      [`bg-gradient-to-r from-${colorOne}-500 to-${colorTwo}-700 text-white`]: !transparent,
+      [`bg-white border-2 border-${colorOne}-500 text-${colorOne}-500`]: transparent,
+    },
+  );
 
-export const ButtonRoundedLink = ({ colorOne, colorTwo, label, disabled = false, transparent = false, action}: IButtonRoundedProps) => {
-  const handleClick = (action: actions) => {
-    if (action === "submit") {
-      console.log("submit");
-    } else if (action === "click") {
-      console.log("click");
-    } else {
-      console.log("log");
-    }
-  };
-
-  const buttonClasses = clsx(styles.buttonrounded, {
-    [`bg-gradient-to-r from-${colorOne}-500 to-${colorTwo}-700 text-white`]: !transparent,
-    [`bg-white border-2 border-${colorOne}-500 text-${colorOne}-500`]: transparent,
-    [styles.disable]: disabled,
-  });
-
-  const textClasses = clsx({
-    [`text-sm font-bold`]: !transparent,
-    [`text-sm font-bold text-${colorOne}-500 hover:text-${colorOne}-700`]: transparent,
-    [styles.disable]: disabled,
-  });
+  const textClasses = clsx(
+    " text-center text-sm font-bold text-xs lg:text-base",
+    {
+      [`text-${colorOne}-500 hover:text-${colorOne}-700`]: transparent,
+    },
+  );
 
   return (
-    <button className={buttonClasses} onClick={() => handleClick(action)} disabled={disabled}>
+    <Link href={`${url}#${referencia}`} className={buttonClasses} >
       <h3 className={textClasses}>{label}</h3>
-    </button>
+    </Link>
   );
 };
