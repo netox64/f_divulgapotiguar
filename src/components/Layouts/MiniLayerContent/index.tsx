@@ -17,11 +17,14 @@ export const MiniLayerContent: React.FC<IMiniLayerContentProps> = ({ children })
                 <div className="bg-gray-200 h-20 rounded">
                     {children[2]}
                 </div>
+                <div className="bg-gray-200 h-20 rounded">
+                    {children[3]}
+                </div>
             </div>
 
             {/* Main Content */}
             <div className="bg-gray-200 flex-grow h-auto rounded">
-                {children[3]}
+                {children[4]}
             </div>
         </div>
     );

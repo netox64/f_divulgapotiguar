@@ -49,6 +49,7 @@ export const ContentManager = () => {
             <MiniLayerContent>
                 <LinkedCard texto="Cadastrar Novo Imovel" destino={"/imoveis/new"} />
                 <LinkedCard texto="Criar Anuncio de Imovel" destino={"/anuncios/new"} />
+                <LinkedCard texto="Submeter imovel para aprovação" destino={"/submissao"} />
                 <LinkedCard texto="Ver Imoveis aprovados" destino={"/"} />
                 <SpaceY />
             </MiniLayerContent>

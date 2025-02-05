@@ -9,12 +9,12 @@ export interface INavBarProps {
 
 export const NavBar = () => {
     let arrayRoutes = ["home", "register", "contact", "login"];
-    const excludeLogin = ['/manager', '/profile', '/dashboard','/planos','/categorias',"/anuncios","/imoveis","/adquiridos","/anuncios","/usuarios"];
+    const excludeLogin = ['/manager', '/profile', '/dashboard', '/planos', '/categorias', "/anuncios", "/imoveis", "/adquiridos", "/anuncios", "/usuarios", "/submissao"];
     const url = usePathname();
 
     const shouldHideLogin = excludeLogin.some((route) => url && url.startsWith(route));
     arrayRoutes = shouldHideLogin ? arrayRoutes.filter((route) => route !== 'login') : arrayRoutes;
-    
+
     return (
         <nav className="w-full min-w-[70%] sm:max-h-[50px] mx-auto sm:border-2 sm:border-[#0b7dda] sm:rounded-full">
             <ul className="flex flex-col md:flex-row justify-end items-center">
