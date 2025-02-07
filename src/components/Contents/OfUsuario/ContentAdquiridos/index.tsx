@@ -16,7 +16,7 @@ export const ContentAdquiridos = () => {
         <div className="w-full">
             <H2Logado texto="Seus Planos presentes na Aplicação" />
             <div className="w-full flex flex-row gap-3 flex-wrap">
-                {!MessageError.isMessageError(planos) && planos.length > 0 ? (
+                {!MessageError.isMessageError(planos) && planos?.length > 0 ? (
                     planos.map((plano: Plano) => (
                         <CardPlano
                             key={plano.planoId}

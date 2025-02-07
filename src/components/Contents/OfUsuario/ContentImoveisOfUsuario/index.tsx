@@ -13,7 +13,7 @@ export const ContentImoveisOfUsuario = () => {
     return (
         <div className="w-full flex flex-wrap">
             {
-                (Array.isArray(imoveis) && imoveis.length > 0) ? (
+                (Array.isArray(imoveis) && imoveis?.length > 0) ? (
                     imoveis.map((imovel: Imovel) => (
                         <CardImovel key={imovel.imovelId} imovel={imovel} />
                     ))

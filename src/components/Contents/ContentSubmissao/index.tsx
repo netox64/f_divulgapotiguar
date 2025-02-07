@@ -60,7 +60,7 @@ export const ContentSubmissao = ({ }) => {
         <div className="w-full flex flex-col">
             <H1 texto={"Seus imóveis não validados que deverão ser submetidos à validação"} />
             <div className="w-full flex gap-2 flex-wrap">
-                {imoveis && imoveis.length > 0 ? (
+                {imoveis && imoveis?.length > 0 ? (
                     imoveis.map((imovel: Imovel) => (
                         <CardBasic key={imovel.imovelId} id={imovel.imovelId} title={imovel.nome}
                             checked={imovelSelecionado === imovel.imovelId} fnCheck={handleSelectImovel}>

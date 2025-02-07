@@ -6,5 +6,6 @@ import { ContentManager } from "./ContentManager";
 import { ContentNewAnuncio } from "./ContentNewAnuncio";
 import { ContentProfile } from "./OfUsuario/ContentProfile";
 import { ContentSubmissao } from "./ContentSubmissao";
+import { ContentAnalisar } from "./ContentAnalisar";
 
-export { ContentManager, ContentProfile, ContentNewAnuncio, ContentBuyPlano, ContentAnuncios, ContentAdquiridos, ContentImoveisOfUsuario, ContentSubmissao };
+export { ContentManager, ContentProfile, ContentNewAnuncio, ContentBuyPlano, ContentAnuncios, ContentAdquiridos, ContentImoveisOfUsuario, ContentSubmissao, ContentAnalisar };

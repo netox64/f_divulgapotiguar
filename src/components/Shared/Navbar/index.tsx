@@ -9,7 +9,7 @@ export interface INavBarProps {
 
 export const NavBar = () => {
     let arrayRoutes = ["home", "register", "contact", "login"];
-    const excludeLogin = ['/manager', '/profile', '/dashboard', '/planos', '/categorias', "/anuncios", "/imoveis", "/adquiridos", "/anuncios", "/usuarios", "/submissao"];
+    const excludeLogin = ['/manager', '/profile', '/dashboard', '/planos', '/categorias', "/anuncios", "/imoveis", "/adquiridos", "/anuncios", "/usuarios", "/submissao", "/analisar"];
     const url = usePathname();
 
     const shouldHideLogin = excludeLogin.some((route) => url && url.startsWith(route));

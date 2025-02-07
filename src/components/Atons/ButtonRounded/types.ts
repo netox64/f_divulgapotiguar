@@ -4,6 +4,7 @@ export interface IButtonRoundedProps {
     disabled?: boolean;
     transparent?: boolean;
     action: actions;
+    fnClick?: () => void;
 }
 
 export type actions = "submit" | "click" | "log";

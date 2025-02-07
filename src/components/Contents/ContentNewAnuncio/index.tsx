@@ -56,7 +56,7 @@ export const ContentNewAnuncio = () => {
     return (
         <div className="w-full min-h-[100vh]">
             <div className="w-full flex gap-4 mt-5 flex-wrap">
-                {imoveis && imoveis.length > 0 ? (
+                {imoveis && imoveis?.length > 0 ? (
                     imoveis.map((imovel: Imovel) => (
                         <CardBasic key={imovel.imovelId} id={imovel.imovelId} title={imovel.nome} checked={selectedId === imovel.imovelId} fnCheck={handleSelectImovel}>
                             <PLimited texto={imovel.sobre} />
@@ -70,7 +70,7 @@ export const ContentNewAnuncio = () => {
             <h2 className="p-5 text-xl font-semibold text-blue-500 text-center">Seus planos disponiveis para vincular esse anúncio.</h2>
 
             <div className="w-full flex gap-4 mt-5 items-center justify-center flex-wrap">
-                {planos && planos.length > 0 ? (
+                {planos && planos?.length > 0 ? (
                     planos.map((plano: Plano) => (
                         <CardSelectRoundedPlano key={plano.planoId} id={plano.planoId} title={plano.nome} checked={selectedIdPlano === plano.planoId} fnCheck={handleSelectPlano}>
 

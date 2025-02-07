@@ -47,10 +47,10 @@ export const ContentManager = () => {
 
             <h2 className="py-5 text-2xl text-slate-500 font-extralight">Informações Gerais</h2>
             <MiniLayerContent>
-                <LinkedCard texto="Cadastrar Novo Imovel" destino={"/imoveis/new"} />
-                <LinkedCard texto="Criar Anuncio de Imovel" destino={"/anuncios/new"} />
-                <LinkedCard texto="Submeter imovel para aprovação" destino={"/submissao"} />
-                <LinkedCard texto="Ver Imoveis aprovados" destino={"/"} />
+                <LinkedCard texto="Cadastrar Imóvel" destino={"/imoveis/new"} />
+                <LinkedCard texto="Submeter imóvel / aprovação" destino={"/submissao"} />
+                <LinkedCard texto="Ver Imóveis aprovados" destino={"/imoveis/aprovados"} />
+                <LinkedCard texto="Criar anúncio do Imóvel" destino={"/anuncios/new"} />
                 <SpaceY />
             </MiniLayerContent>
         </div>

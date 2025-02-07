@@ -22,10 +22,10 @@ export const FormRegisterImovel = () => {
     const onSubmit = async (data: IFormImovel) => {
         const response = await postImovel(data);
         if (!MessageError.isMessageError(response)) {
-            addToImoveis(response);
             addImovelToUsuarioLogado(response);
+            addToImoveis(response);
             toast.success("imóvel criado !");
-            router.push('/usuarios/imoveis');
+            router.push('/manager');
         } else {
             toast.error(response.message);
         }

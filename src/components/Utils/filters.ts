@@ -1,5 +1,5 @@
 import { MessageError } from "@/components/Forms/functions-request";
-import { Plano, Usuario } from "@/components/Forms/types-models";
+import { Imovel, Plano, Usuario } from "@/components/Forms/types-models";
 
 export const handleFilter = (planos: Plano[], usuarioLogado: Usuario): Plano[] => {
     if (!usuarioLogado || !usuarioLogado.planos) { return []; };
@@ -11,5 +11,9 @@ export const handleFilter = (planos: Plano[], usuarioLogado: Usuario): Plano[] =
 
 
 export const filterPlanosNotAdquiridos = (planos: Plano[] | MessageError): Plano[] => {
-    return MessageError.isMessageError(planos) ? [] : planos.filter((plano: Plano) => plano.adquirido === false);
+    return MessageError.isMessageError(planos) ? [] : planos?.filter((plano: Plano) => plano.adquirido === false);
+}
+
+export const filterImovelStatusPendente = (imoveis: Imovel[] | MessageError): Imovel[] => {
+    return MessageError.isMessageError(imoveis) ? [] : imoveis?.filter((imovel: Imovel) => imovel.status === "PENDENTE");
 }
