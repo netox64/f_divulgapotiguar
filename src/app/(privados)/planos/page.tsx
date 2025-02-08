@@ -1,4 +1,4 @@
-import { H2Logado } from "@/components/Atons/H2Logado";
+import { H2Logado } from "@/components/Atons/Texts/H2Logado";
 import { CardPlanoSeller } from "@/components/Cards";
 import { Container } from "@/components/Containers";
 import { getAllPlanos, MessageError } from "@/components/Forms/functions-request";

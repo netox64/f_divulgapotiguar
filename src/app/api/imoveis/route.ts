@@ -22,7 +22,6 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
             const data = await response.json();
             return NextResponse.json(data, { status: 200 });
         }
-
         return NextResponse.json({ message: 'The request contains errors, such as invalid data, improper format, or missing required fields.' }, { status: 400 });
 
     } catch (error) {

@@ -1,3 +1,5 @@
+import { Status } from "./types-models";
+
 interface IFormImovel { nome: string, localizacao: string, comprimento: number, largura: number, imagem: string, tipo: string, sobre: string, usuarioId: string; };
 interface IFormAnuncio {
     imovelId: number; planoId: number; categoriasIds?: (number | undefined)[] | null | undefined; title: string; descricao: string;
@@ -21,5 +23,10 @@ interface IFormAnuncioUpdate {
     imovelId: number; planoId: number; categoriasIds?: (number | undefined)[] | null | undefined; title?: string; descricao?: string;
     imagemPropaganda?: string; tipoPagamento?: string; stars?: number; preco?: number; usuarioId: string
 };
+interface IFormImovelUpdate {
+    nome?: string, localizacao?: string, comprimento?: number, largura?: number, imagemImovel?: string, tipo?: string, matriculaCartorio?: string,
+    nomeProprietario?: string, cpfCnpjProprietario?: string, rgProprietario?: string, restricoes?: string, nomeCartorioRegistrado?: string, assinaturaControle?: string,
+    status?: Status, isAnunciado?: boolean, sobre?: string, anuncioId?: number
+};
 
-export type { IFormImovel, IFormAnuncio, IFormInputCategoria, IFormInputPlano, IFormRegister, IUsuarioUpdate };
+export type { IFormImovel, IFormAnuncio, IFormInputCategoria, IFormInputPlano, IFormRegister, IUsuarioUpdate, IFormImovelUpdate };

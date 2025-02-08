@@ -12,9 +12,8 @@ export const ButtonRounded = ({ color, label, disabled = false, transparent = fa
     };
 
     const buttonClasses = clsx(styles.buttonrounded, {
-        [`bg-${color}-500 hover:bg-${color}-700 text-white`]: !transparent,
-        [`bg-white text-${color}-500 hover:text-${color}-700 border-2 border-${color}-500 hover:border-${color}-700`]:
-            transparent,
+        [`bg-${color}-500 hover:bg-${color}-700 text-white my-3`]: !transparent,
+        [`bg-white text-${color}-500 hover:text-${color}-700 border-2 border-${color}-500 my-3 hover:border-${color}-700`]: transparent,
         [styles.disable]: disabled,
     });
 

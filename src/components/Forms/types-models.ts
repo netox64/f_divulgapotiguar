@@ -29,5 +29,6 @@ type Anuncio = {
 };
 
 type Feedback = { feedbackId: number, stars: number, comentario: string, remetenteUsername: string, anuncio: string };
+type Avalicacao = { quantVerificacao: number, quantAcerto: number, indiceConfiabilidade: number }
 
-export type { Usuario, UserRole, Status, Plano, Pagamento, Notificacao, Imovel, Categoria, Anuncio, Feedback };
+export type { Usuario, UserRole, Status, Plano, Pagamento, Notificacao, Imovel, Categoria, Anuncio, Feedback, Avalicacao };
