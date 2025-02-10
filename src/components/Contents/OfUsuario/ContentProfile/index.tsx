@@ -15,15 +15,21 @@ interface IimgObjState { file: File | null, fileName: string, imageName: string 
 type objectControl = { on: boolean, update: boolean }
 
 export const ContentProfile = () => {
+    const router = useRouter();
     const usuario = useGlobalStore(state => state.usuarioLogado);
     const addToUsuarioLogado = useGlobalStore(state => state.addToUsuarioLogado);
-    const methods = useForm<IUsuarioUpdate>({ resolver: yupResolver(formSchema), mode: 'onChange', defaultValues: { username: usuario.username, phone: usuario.phone, password: '', role: '', token: '', notificacoes: [], planos: [] } });
-    const router = useRouter();
+    const methods = useForm<IUsuarioUpdate>({ resolver: yupResolver(formSchema), mode: 'onChange', defaultValues: { username: usuario.username, phone: usuario.phone, password: '' } });
     const [image, setControleImage] = useState<IimgObjState>({ file: null, fileName: "Escolher Arquivo", imageName: "avatar.svg" });
     const [control, setControl] = useState<objectControl>({ on: false, update: false });
 
 
 
+    useEffect(() => {
+        methods.reset({
+            ...methods.getValues(), username: usuario.username, phone: usuario.phone, password: '', role: usuario.role, token: usuario.token, notificacoes: [], planos: []
+        });
+
+    }, [usuario]);
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
@@ -52,7 +58,7 @@ export const ContentProfile = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username: dados.username, image: image.fileName, phone: dados.phone, password: dados.password, role: dados.role, token: dados.token, notificacoes: [0], planos: [0] } as IUsuarioUpdate),
+                body: JSON.stringify({ username: dados.username, image: image.fileName, phone: dados.phone, password: dados.password } as IUsuarioUpdate),
             });
             if (response.status === 200) {
                 const data = await response.json();
@@ -66,7 +72,6 @@ export const ContentProfile = () => {
         } catch (error) {
             toast.error("Erro ao atualizar dados do usuário");
         }
-
         router.push("/manager");
     };
     const onSubmit: SubmitHandler<IUsuarioUpdate> = (data) => {
@@ -74,14 +79,6 @@ export const ContentProfile = () => {
     };
     const handleModeUpdate = () => { setControl((prev) => ({ on: !prev.on, update: !prev.update })) };
     const handleCancel = useCallback(() => { setControleImage({ file: null, fileName: "Escolher Arquivo", imageName: "avatar.svg" }); setControl((prev) => ({ on: !prev.on, update: !prev.update })); }, []);
-
-
-    useEffect(() => {
-        methods.reset({
-            ...methods.getValues(), username: usuario.username, phone: usuario.phone, password: '', role: usuario.role, token: usuario.token, notificacoes: [], planos: []
-        });
-
-    }, [usuario]);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-slate-50">
@@ -121,13 +118,7 @@ export const ContentProfile = () => {
                         <AvatarUpdateField textlabel={"Total Notificações"} textfield={usuario.notificacoes?.length.toString() || "0"} />
                         <AvatarUpdateField textlabel={"Total de planos Adquiridos"} textfield={usuario.planos?.length.toString() || "0"} />
                         {control.update ? (
-                            <>
-                                <InputCustom name={"password"} type="password" label={"Digite sua senha para confirmar mudanças"} />
-                                <InputCustom name={"role"} label={""} ishidden={true} />
-                                <InputCustom name={"token"} label={""} ishidden={true} />
-                                <InputCustom name={"notificacoes"} label={""} ishidden={true} />
-                                <InputCustom name={"planos"} label={""} ishidden={true} />
-                            </>
+                            <InputCustom name={"password"} type="password" label={"Digite sua senha para confirmar mudanças"} />
                         ) : null}
                     </div>
                     <div className="mt-8 flex justify-center gap-4">

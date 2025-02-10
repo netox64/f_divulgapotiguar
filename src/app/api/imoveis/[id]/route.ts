@@ -12,7 +12,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     try {
         const body = await req.json();
-        const response = await fetch(URL_BASE + `/${id}`, {
+        const response = await fetch(`${URL_BASE}/${id}`, {
             method: 'PUT',
             headers: {
                 Authorization: `Bearer ${jwt}`,
@@ -20,7 +20,6 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
             },
             body: JSON.stringify(body),
         });
-
         const contentType = response.headers.get("Content-Type");
         if (contentType && contentType.includes("application/json") && response.ok) {
             const data = await response.json();

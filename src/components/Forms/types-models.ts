@@ -1,5 +1,5 @@
 type UserRole = "ADMIN" | "USER";
-type Status = "ANUNCIADO" | "ANALISADO" | "PENDENTE";
+type Status = "ANUNCIADO" | "ANALISADO" | "PENDENTE" | "INVALIDO";
 type Usuario = {
     usuarioId: string, username: string, image: string, phone: string, totalStars: number, cpf: string, email: string, password: string, role: UserRole,
     token: string, createdAt: Date,

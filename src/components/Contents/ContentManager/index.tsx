@@ -8,14 +8,38 @@ import { MiniLayerContent } from "@/components/Layouts";
 import { Anuncio } from "@/components/Forms/types-models";
 import { getServerSideAnunciosForUsuarioProps } from "@/components/Forms/functions-request";
 import { H1 } from "@/components/Atons/Texts";
+import { useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 export const ContentManager = () => {
+    const searchParams = useSearchParams();
+    const error = searchParams.get("error");
+
     const { usuarioId } = useGlobalStore(state => state.usuarioLogado);
     const [anunciosUsuario, setAnunciosUsuario] = useState<Anuncio[]>([]);
     const [valorPesquisado, setvalorPesquisado] = useState<string>('');
 
-    
-    useEffect(() => { handleGetAnunciosOfUsuario(usuarioId); }, [usuarioId]);
+
+
+    useEffect(() => {
+        if (error) {
+            switch (error) {
+                case "not_has_token":
+                    toast.error("Você não deveria nem estar aqui bixo, está sem token de acesso.");
+                    break;
+                case "invalid_token":
+                    toast.error("Token inválido é de 1500 A.C");
+                    break;
+                case "invalid_role":
+                    toast.error("Você não é ADMIN major, não pode acessar isso aí não.");
+                    break;
+                default:
+                    toast.error("Ocorreu um erro desconhecido.");
+            }
+        }
+
+        handleGetAnunciosOfUsuario(usuarioId);
+    }, [usuarioId, error]);
     const handleGetAnunciosOfUsuario = async (usuarioId: string) => {
         const list = await getServerSideAnunciosForUsuarioProps(usuarioId);
         if (Array.isArray(list)) { setAnunciosUsuario(list); }
@@ -29,8 +53,6 @@ export const ContentManager = () => {
         }
         return anunciosUsuario;
     };
-
-
 
     return (
         <div className="w-full h-full flex flex-col items-center">

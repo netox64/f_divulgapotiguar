@@ -17,3 +17,7 @@ export const filterPlanosNotAdquiridos = (planos: Plano[] | MessageError): Plano
 export const filterImovelStatusPendente = (imoveis: Imovel[] | MessageError): Imovel[] => {
     return MessageError.isMessageError(imoveis) ? [] : imoveis?.filter((imovel: Imovel) => imovel.status === "PENDENTE");
 }
+
+export const filterImovelStatusAnalisados = (imoveis: Imovel[] | MessageError): Imovel[] => {
+    return MessageError.isMessageError(imoveis) ? [] : imoveis?.filter((imovel: Imovel) => imovel.status === "ANALISADO");
+}

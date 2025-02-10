@@ -1,7 +1,7 @@
 "use client";
 import { ButtonRounded, PLimited } from "@/components/Atons";
 import { CardBasic } from "@/components/Cards";
-import { Avalicacao, Imovel } from "@/components/Forms/types-models";
+import { Avalicacao, Imovel, Status } from "@/components/Forms/types-models";
 import { filterImovelStatusPendente } from "@/components/Utils/filters";
 import { useGlobalStore } from "@/store";
 import React, { useEffect, useState, useRef } from "react";
@@ -17,7 +17,7 @@ GlobalWorkerOptions.workerSrc = "/pdfjs/build/pdf.worker.mjs";
 export const ContentAnalisar = () => {
     const router = useRouter();
     const usuarioLogado = useGlobalStore(state => state.usuarioLogado);
-    const imoveis = filterImovelStatusPendente(usuarioLogado.imoveis);
+    const imoveis = filterImovelStatusPendente(useGlobalStore(state => state.imoveis));
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [selectedId, setSelectedId] = useState<number>();
     const [textDocs, setTextDocs] = useState<string>('');
@@ -101,10 +101,9 @@ export const ContentAnalisar = () => {
         if (selectedId !== undefined) { extrairPdf(selectedId); }
     };
 
-    const handleUpdate = async () => {
-        const imovel = imoveis.find((imovel: Imovel) => imovel.imovelId === selectedId);
-        const data: IFormImovelUpdate = { status: "ANALISADO" };
-        const response = await fetch(`http://localhost:3000/imoveis/${selectedId}`, {
+    const handleUpdate = async (sts: Status) => {
+        const data: IFormImovelUpdate = { status: sts };
+        const response = await fetch(`http://localhost:3000/api/imoveis/${selectedId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -112,6 +111,7 @@ export const ContentAnalisar = () => {
             body: JSON.stringify(data),
         });
         if (response.ok) {
+            toast.success("validação realizada.");
             router.push("/manager");
         }
     };
@@ -121,7 +121,7 @@ export const ContentAnalisar = () => {
             <div className="w-full flex gap-4 mt-5 flex-wrap">
                 {imoveis && imoveis.length > 0 ? (
                     imoveis.map((imovel: Imovel) => (
-                        <CardBasic key={imovel.imovelId} id={imovel.imovelId} title={imovel.nome} checked={selectedId === imovel.imovelId} fnCheck={handleSelectImovel}>
+                        <CardBasic key={imovel.imovelId} id={imovel.imovelId} title={imovel.nome} image={imovel.imagemImovel} checked={selectedId === imovel.imovelId} fnCheck={handleSelectImovel}>
                             <PLimited texto={imovel.sobre} />
                         </CardBasic>
                     ))
@@ -158,8 +158,8 @@ export const ContentAnalisar = () => {
                 </div>
             </div>
             <div className="w-full m-5 flex gap-5 items-center justify-center">
-                <ButtonRounded label={"Recusar"} color={"red"} action={"submit"} fnClick={() => { }} />
-                <ButtonRounded label={"Validar"} color={"blue"} action={"submit"} fnClick={handleUpdate} />
+                <ButtonRounded label={"Recusar"} color={"red"} action={"submit"} fnClick={() => handleUpdate("ANALISADO")} />
+                <ButtonRounded label={"Validar"} color={"blue"} action={"submit"} fnClick={() => handleUpdate("INVALIDO")} />
             </div>
         </div>
     );

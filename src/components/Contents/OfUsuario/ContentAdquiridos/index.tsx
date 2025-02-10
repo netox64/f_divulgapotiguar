@@ -13,24 +13,16 @@ export const ContentAdquiridos = () => {
 
     useEffect(() => { }, [usuarioLogado]);
     return (
-        <div className="w-full">
+        <div className="w-full flex flex-col items-center justify-center">
             <H2Logado texto="Seus Planos presentes na Aplicação" />
             <div className="w-full flex flex-row gap-3 flex-wrap">
                 {!MessageError.isMessageError(planos) && planos?.length > 0 ? (
                     planos.map((plano: Plano) => (
-                        <CardPlano
-                            key={plano.planoId}
-                            planoId={plano.planoId}
-                            nome={plano.nome}
-                            valor={plano.valor}
-                            quantAnuncio={plano.quantAnuncio}
-                            duracao={plano.duracao}
-                            dataValidade={new Date()}
-                            dataAdquerido={new Date()}
+                        <CardPlano key={plano.planoId} planoId={plano.planoId} nome={plano.nome} valor={plano.valor} quantAnuncio={plano.quantAnuncio} duracao={plano.duracao} dataValidade={new Date()} dataAdquerido={new Date()}
                         />
                     ))
                 ) : (
-                    <p className="text-center">Não há nenhum plano cadastrado no sistema</p>
+                    <p className="text-center">Você não adquiriu nenhum plano ainda no sistema</p>
                 )}
             </div>
         </div>

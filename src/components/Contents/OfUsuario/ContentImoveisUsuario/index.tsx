@@ -5,7 +5,7 @@ import { Imovel } from "@/components/Forms/types-models";
 import { useGlobalStore } from "@/store";
 import React, { useEffect } from "react";
 
-export const ContentImoveisOfUsuario = () => {
+export const ContentImoveisUsuario = () => {
     const usuarioLogado = useGlobalStore(state => state.usuarioLogado);
     const imoveis = usuarioLogado.imoveis;
 
