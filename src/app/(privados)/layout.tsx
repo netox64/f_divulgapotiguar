@@ -11,6 +11,7 @@ export const metadata: Metadata = { title: "Divulga Potiguar", description: "Gen
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const session = await getServerSession();
+    const user = session?.user;
     if (!session) { redirect("/"); };
 
     return (
@@ -22,7 +23,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                 </Header>
                 <SpaceToast />
                 <LayoutManager>
-                    <SideBar />
+                    <SideBar username={user?.name ?? "guest"} img={user?.image ?? "avatar.svg"} />
                     <LoadContext>
                         {children}
                     </LoadContext>

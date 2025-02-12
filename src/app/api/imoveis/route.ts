@@ -7,9 +7,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const cookieStore = cookies();
     const token = (await cookieStore).get('jwt_back');
     let jwt = !token ? "not found" : token.value;
-
     try {
-
         const response = await fetch(URL_BASE, {
             method: 'GET',
             headers: {

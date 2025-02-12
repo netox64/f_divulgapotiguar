@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import formidable, { Fields, Files } from 'formidable';
-import fs from 'fs';
-import path from 'path';
-import { IncomingMessage } from 'http';
-import { Readable } from 'stream';
+import { NextRequest, NextResponse } from "next/server";
+import formidable, { Fields, Files } from "formidable";
+import fs from "fs";
+import path from "path";
+import { IncomingMessage } from "http";
+import { Readable } from "stream";
 
 export const config = { api: { bodyParser: false } };
 
@@ -32,7 +32,7 @@ function toNodeRequest(req: NextRequest): IncomingMessage {
 }
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'imoveis');
+  const uploadDir = path.join(process.cwd(), "public", "uploads", "profiles");
 
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
@@ -45,13 +45,18 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   return new Promise((resolve) => {
     form.parse(nodeReq, (err, fields: Fields, files: Files) => {
       if (err) {
-        resolve(NextResponse.json({ message: 'Erro ao processar o arquivo.' }, { status: 500 }));
+        resolve(
+          NextResponse.json({ message: "Erro ao processar o arquivo." }, { status: 500 })
+        );
         return;
       }
 
       const file = Array.isArray(files.file) ? files.file[0] : files.file;
-      const filePath = file?.filepath;
-      resolve(NextResponse.json({ message: 'Arquivo enviado com sucesso!', filePath }, { status: 201 }));
+      const fileName = file ? path.basename(file.filepath) : null;
+
+      resolve(
+        NextResponse.json({ message: "Arquivo enviado com sucesso!", fileName }, { status: 201 })
+      );
     });
   });
 }

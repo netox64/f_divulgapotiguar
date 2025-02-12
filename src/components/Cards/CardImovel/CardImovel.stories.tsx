@@ -34,7 +34,7 @@ export const Default: Story = {
     args: {
         imovel: {
             imovelId: 1, nome: "Casa de Praia", localizacao: "Rua das Ondas, 123", areaCalculada: 100, comprimento: 10,
-            largura: 10, imagemImovel: "imgs_default.svg", tipo: "Casa", sobre: "Uma bela casa de praia com vista para o mar.",
+            largura: 10, tipo: "Casa", sobre: "Uma bela casa de praia com vista para o mar.",
             status: "Disponível", usuario: "João Silva", isAnunciado: true
         } as unknown as Imovel,
         extraContent: null,

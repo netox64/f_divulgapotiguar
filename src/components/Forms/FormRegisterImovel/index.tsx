@@ -36,7 +36,7 @@ export const FormRegisterImovel = () => {
             const formData = new FormData();
             formData.append('file', file);
             try {
-                const response = await fetch('/api/upload', { method: 'POST', body: formData });
+                const response = await fetch('/api/imoveis/upload', { method: 'POST', body: formData });
                 const data = await response.json();
                 if (response.status === 201) {
                     const pathArray = data.filePath.split(/[/\\]/);

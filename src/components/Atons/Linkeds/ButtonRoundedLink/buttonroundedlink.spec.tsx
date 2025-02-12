@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { ButtonRoundedLink } from ".";
+import { LinkStyleButton } from ".";
 
-describe("<ButtonRoundedLink />", () => {
+describe("<LinkStyleButton />", () => {
 
   render(
-    <ButtonRoundedLink label={"save"} colorOne={"red"} colorTwo={"red"} referencia={""} url={""} />
+    <LinkStyleButton label={"save"} colorOne={"red"} colorTwo={"red"} referencia={""} url={""} />
   );
   const button = screen.getByRole("link", { name: /save/i });
 

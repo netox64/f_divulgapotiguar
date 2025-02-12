@@ -1,79 +1,99 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/testing-library";
 import { ButtonRounded } from ".";
 
 const meta: Meta<typeof ButtonRounded> = {
-  title: "Components/Buttons/ButtonRounded",
-  component: ButtonRounded,
-  tags: ["autodocs"],
-  argTypes: {
-    color: {
-      control: {
-        type: 'color',
-        presetColors: ["red","blue","green","yellow","pink","indigo","teal"]
-      },
+    title: "Components/Buttons/ButtonRounded",
+    component: ButtonRounded,
+    tags: ["autodocs"],
+    argTypes: {
+        color: {
+            control: { type: "color" },
+            description: "Define a cor do botão.",
+            options: ["red", "blue", "green", "yellow", "pink", "indigo", "teal"],
+        },
+        label: {
+            control: "text",
+            description: "Texto exibido dentro do botão.",
+        },
+        transparent: {
+            control: "boolean",
+            description: "Define se o botão será transparente.",
+        },
+        disabled: {
+            control: "boolean",
+            description: "Define se o botão estará desabilitado.",
+        },
+        fnClick: {
+            action: "clicked",
+            description: "Função disparada ao clicar no botão.",
+        },
     },
-    action: {
-      options: ["click", "submit"],
-      control: { type: "radio" },
+    parameters: {
+        docs: {
+            description: {
+                component: `O **ButtonRounded** é um botão arredondado personalizável, ideal para ações que exigem interação do usuário. Ele suporta diferentes cores, transparência e estados.`,
+            },
+        },
     },
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: `O componente **ButtonRounded** é um botão com bordas arredondadas. Ele aceita várias personalizações, como cor, rótulo, estado de desativado e transparência   Este componente é ideal para ações de interface de usuário onde uma aparência limpa e moderna é necessária  Ele pode ser configurado para diferentes estados, como ativo, desabilitado e transparente.`,
-      },
-    },
-  },
 };
 export default meta;
 
 type Story = StoryObj<typeof ButtonRounded>;
 
+const simulateClick = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    const button = await canvas.findByRole("button");
+    await userEvent.click(button);
+};
+
 export const Default: Story = {
-  args: {
-    color: "indigo",
-    label: "Indigo",
-    action: "click",
-  },
-
-  render: (args) => <ButtonRounded {...args}/>,
-
-  parameters: {
-    docs: {
-      description: {
-        story: `Esta história demonstra o **ButtonRounded** em várias cores sem o estilo de transparência.  Clique no botão para disparar a ação associada. Ideal para uso em botões de ação visualmente distintos.`,
-      },
+    args: {
+        color: "indigo",
+        label: "Indigo",
+        fnClick: () => console.log("Botão clicado!"),
     },
-  }
+    render: (args) => <ButtonRounded {...args} />,
+    play: simulateClick,
+    parameters: {
+        docs: {
+            description: {
+                story: `Demonstra o **ButtonRounded** com uma cor definida. Clique para testar a interação.`,
+            },
+        },
+    },
 };
 
 export const Transparent: Story = {
-  args: {
-    color: "indigo",
-    label: "Qualquer coisa",
-    transparent: true,
-    action: "click",
-  },
-  render: (args) => <ButtonRounded {...args} />,
-  parameters: {
-    docs: {
-      description: {
-        story: `Aqui temos o **ButtonRounded** com o estilo de transparência ativado. A transparência altera o fundo do botão para torná-lo parcialmente invisível,  permitindo que o fundo da página ou do componente seja visível através dele.  Esse estilo é útil quando o botão precisa se integrar a um fundo dinâmico ou quando você deseja um visual mais sutil.`,
-      },
+    args: {
+        color: "indigo",
+        label: "Transparente",
+        transparent: true,
+        fnClick: () => console.log("Botão transparente clicado!"),
     },
-  },
+    render: (args) => <ButtonRounded {...args} />,
+    parameters: {
+        docs: {
+            description: {
+                story: `O botão com transparência ativada, permitindo que o fundo seja visível através dele.`,
+            },
+        },
+    },
 };
 
 export const Disabled: Story = {
-  render: () => (
-    <ButtonRounded label={"Salvar"} color={"red"} action="click" disabled={true}
-    />
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: `Este é um exemplo do **ButtonRounded** no estado **desabilitado**. Quando o botão está desabilitado, ele não responde a interações de clique e geralmente  apresenta um estilo visual diferente (como opacidade reduzida) para indicar que a ação não está disponível.`,
-      },
+    args: {
+        label: "Desativado",
+        color: "red",
+        disabled: true,
+        fnClick: () => console.log("Esse clique não deveria acontecer"),
     },
-  },
+    render: (args) => <ButtonRounded {...args} />,
+    parameters: {
+        docs: {
+            description: {
+                story: `Exemplo do **ButtonRounded** no estado **desativado**. Ele não responde a cliques.`,
+            },
+        },
+    },
 };

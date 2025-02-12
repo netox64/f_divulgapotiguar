@@ -6,7 +6,7 @@ describe("<SideBar />", () => {
     //Given globals
     beforeEach(() => {
         render(
-            <SideBar />
+            <SideBar username={""} img={""} />
         );
     });
 

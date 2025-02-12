@@ -60,7 +60,7 @@ export const ContentManager = () => {
             <H1 texto={"Seus imóveis anunciados"} />
             <div className="w-full h-auto gap-5 flex flex-wrap">
                 {handlerFiltered().length > 0 ? (handlerFiltered().map((item: Anuncio) => (
-                    <CardAnuncio key={item.anuncioId} title={item.title} body={item.descricao} url={`/anuncios/${item.anuncioId}`} />
+                    <CardAnuncio key={item.anuncioId} title={item.title} img={item.imovel?.imagemImovel} body={item.descricao} url={`/anuncios/${item.anuncioId}`} />
                 ))
                 ) : (
                     <p className="w-full text-center text-blue-400">Você ainda não possui itens anunciados.</p>

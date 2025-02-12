@@ -34,7 +34,7 @@ const handler = NextAuth({
                         id: "",
                         name: decodedClaims?.Name,
                         email: decodedClaims?.Email,
-                        image: "",
+                        image: decodedClaims?.Image,
                         role: decodedClaims?.Role
                     }
                 }

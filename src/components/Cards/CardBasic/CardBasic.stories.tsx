@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { CardBasic } from '.';
-import { PLimited } from '@/components/Atons';
+import { PLimited } from '@/components/Atons/Texts';
 
 const meta: Meta<typeof CardBasic> = {
     title: 'Components/Cards/CardBasic',

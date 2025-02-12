@@ -2,9 +2,14 @@
 
 import clsx from "clsx";
 import styles from "./buttonrounded.module.css";
-import { actions, IButtonRoundedProps } from "./types";
+export interface IButtonRoundedProps {
+    label: string; color: "red" | "blue" | "green" | "yellow" | "pink" | "indigo" | "teal";
+    disabled?: boolean;
+    transparent?: boolean;
+    fnClick?: () => void;
+}
 
-export const ButtonRounded = ({ color, label, disabled = false, transparent = false, action, fnClick }: IButtonRoundedProps) => {
+export const ButtonRounded = ({ color, label, disabled = false, transparent = false, fnClick }: IButtonRoundedProps) => {
     const handleClick = () => {
         if (fnClick) {
             fnClick();
@@ -18,11 +23,7 @@ export const ButtonRounded = ({ color, label, disabled = false, transparent = fa
     });
 
     return (
-        <button
-            className={buttonClasses}
-            onClick={handleClick}
-            disabled={disabled}
-        >
+        <button className={buttonClasses} onClick={handleClick} disabled={disabled}>
             {label}
         </button>
     );

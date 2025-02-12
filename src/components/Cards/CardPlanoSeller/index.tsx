@@ -8,8 +8,6 @@ import React from "react";
 export interface ICardPlanoProps {
     context: Plano;
 };
-
-// planoId: number, nome: string, valor: number, quantAnuncio: number, duracao: number, dataValidade: Date, dataAdquerido: Date, pagamento: Pagamento
 export const CardPlanoSeller: React.FC<ICardPlanoProps> = ({ context }) => {
     const addToPlanoComprado = useGlobalStore(state => state.addToPlanoComprado);
     const router = useRouter();
@@ -18,7 +16,7 @@ export const CardPlanoSeller: React.FC<ICardPlanoProps> = ({ context }) => {
         addToPlanoComprado(context);
         router.push("/planos/seller");
     }
-    //nome: string; valor: number; quantAnuncio: number; duracao: number; dataValidade: Date; dataAdquerido: Date; textButton?: string
+
     return (
         <div className="flex flex-col rounded-lg bg-slate-200 shadow-sm max-w-80 p-8 my-6 border border-slate-200 hover:bg-custom-blue">
             <div className="pb-8 m-0 mb-8 text-center text-slate-800 border-b border-slate-200">
@@ -27,7 +25,7 @@ export const CardPlanoSeller: React.FC<ICardPlanoProps> = ({ context }) => {
                 </p>
                 <h1 className="flex justify-center gap-1 mt-4 font-bold text-slate-800 text-6xl">
                     <span className="text-3xl">R$</span>{context.valor}
-                    <span className="self-end text-3xl">/ano</span>
+                    <span className="self-end font-light text-sm"> {context.duracao > 1 ? (`/ válido durante ${context.duracao} anos`) : (`/ válido durante ${context.duracao} ano`)}</span>
                 </h1>
             </div>
             <div className="p-0">

@@ -5,9 +5,7 @@ import { Usuario } from "@/components/Forms/types-models";
 import { useGlobalStore } from "@/store";
 import React, { ReactNode, useEffect } from "react";
 
-export interface ILoadContextProps {
-    children: ReactNode;
-}
+export interface ILoadContextProps { children: ReactNode; }
 
 export const LoadContext: React.FC<ILoadContextProps> = ({ children }) => {
     const setUsuario = useGlobalStore((state) => state.addToUsuarioLogado);

@@ -1,5 +1,6 @@
-import { LinkedCircle, ButtonRoundedLink, ContainerFiveCent, SpaceY, PLimited } from "@/components/Atons";
-import { H2, Letreiro } from "@/components/Atons/Texts";
+import { LinkedCircle, ContainerFiveCent, SpaceY } from "@/components/Atons";
+import { LinkStyleButton } from "@/components/Atons/Linkeds";
+import { H2, Letreiro, PLimited } from "@/components/Atons/Texts";
 import { CardBasic, CardPlano } from "@/components/Cards";
 import { ContainerRedesSociais, ContainerRows } from "@/components/Containers";
 import { SectionOne, SectionThree, SectionTwo } from "@/components/Containers/Sections";
@@ -17,7 +18,7 @@ export default async function Home() {
             <SectionOne>
                 <ContainerFiveCent position={"start"}>
                     <SpaceY />
-                    <ButtonRoundedLink label={"O imóvel que você procura esta aqui!"} colorOne={"green"} colorTwo={"blue"} url={"/"} referencia={"section-anunciados"} />
+                    <LinkStyleButton label={"O imóvel que você procura esta aqui!"} colorOne={"green"} colorTwo={"blue"} url={"/"} referencia={"section-anunciados"} />
                     <Letreiro title={"Divulga Potiguar"} objAnunciado={"Imóveis"} />
                 </ContainerFiveCent>
                 <ContainerFiveCent position={"end"}>

@@ -9,7 +9,7 @@ export interface IButtonRoundedProps {
   colorTwo: "red" | "blue" | "green" | "yellow" | "pink" | "indigo" | "teal";
 }
 
-export const ButtonRoundedLink = ({ colorOne, colorTwo, label, transparent = false, url, referencia }: IButtonRoundedProps) => {
+export const LinkStyleButton = ({ colorOne, colorTwo, label, transparent = false, url, referencia }: IButtonRoundedProps) => {
   const buttonClasses = clsx(
     "min-w-[100px] lg:min-w-fit max-w-[200px] h-[50px] lg:px-[14px] py-[14px] inline-block rounded-full",
     {

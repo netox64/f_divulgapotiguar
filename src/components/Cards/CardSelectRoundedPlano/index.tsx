@@ -1,6 +1,6 @@
 "use client";
 
-import { IPLimitedProps } from "@/components/Atons";
+import { IPLimitedProps } from "@/components/Atons/Texts/PLimited";
 import { Component, ReactNode } from "react";
 
 export interface ICardSelected {

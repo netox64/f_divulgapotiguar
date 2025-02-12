@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { LinkButtonRounded } from ".";
+import { ButtonLink } from ".";
 
-const meta: Meta<typeof LinkButtonRounded> = {
-  title: "Components/LinkButtonRounded",
-  component: LinkButtonRounded,
+const meta: Meta<typeof ButtonLink> = {
+  title: "Components/Buttons/ButtonLink",
+  component: ButtonLink,
   tags: ["autodocs"],
   argTypes: {
     colorOne: {
@@ -22,7 +22,7 @@ const meta: Meta<typeof LinkButtonRounded> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof LinkButtonRounded>;
+type Story = StoryObj<typeof ButtonLink>;
 
 export const Default: Story = {
   args: {
@@ -31,7 +31,7 @@ export const Default: Story = {
     label: "O imóvel que você procura esta aqui!",
     url:"/",
   },
-  render: (args) => <LinkButtonRounded {...args} />,
+  render: (args) => <ButtonLink {...args} />,
 };
 
 export const Transparent: Story = {
@@ -41,5 +41,5 @@ export const Transparent: Story = {
     label: "O imóvel que você procura esta aqui!",
     url:"/",
   },
-  render: (args) => <LinkButtonRounded {...args} transparent={true}/>,
+  render: (args) => <ButtonLink {...args} transparent={true}/>,
 };

@@ -8,12 +8,13 @@ import React, { useEffect } from "react";
 
 export const ContentImoveis = () => {
     const imoveis = useGlobalStore(state => state.imoveis);
+    console.log(imoveis)
 
     
     useEffect(() => { }, [imoveis]);
     return (
         <div className="w-full flex flex-col">
-            <H2 texto={"Seus Imoveis contidos na aplicação"} />
+            <H2 texto={"Todos os Imoveis contidos na aplicação"} />
             <div className="w-full flex flex-wrap">
                 {(Array.isArray(imoveis) && imoveis.length > 0) ? (imoveis.map((imovel: Imovel) => (<CardImovel key={imovel.imovelId} imovel={imovel} />))
                 ) : (<p>carregando</p>)}

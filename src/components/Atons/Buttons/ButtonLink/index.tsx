@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 
-export interface ILinkButtonRoundedProps {
+export interface IButtonLinkProps {
   label: string;
   url: string;
   colorOne: "red" | "blue" | "green" | "yellow" | "pink" | "indigo" | "teal";
@@ -12,7 +12,7 @@ export interface ILinkButtonRoundedProps {
   fnClick?: (url: string) => void;
 }
 
-export const LinkButtonRounded = ({ colorOne, colorTwo, label, disabled = false, transparent = false, url, fnClick }: ILinkButtonRoundedProps) => {
+export const ButtonLink = ({ colorOne, colorTwo, label, disabled = false, transparent = false, url, fnClick }: IButtonLinkProps) => {
   const buttonClasses = clsx(
     "inline-block text-center rounded-md",
     {

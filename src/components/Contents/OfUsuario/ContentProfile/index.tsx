@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useGlobalStore } from "@/store";
-import { AvatarUpdate, AvatarUpdateField, ButtonEditIcon, InputCustom, InputRow, SmallButton } from "@/components/Atons";
+import { AvatarUpdate, AvatarUpdateField, InputCustom, InputRow, SmallButton } from "@/components/Atons";
 import Canivete from "@/components/Utils/canivete";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formSchema } from "./formupdateusuario-scheme";
 import { IUsuarioUpdate } from "@/components/Forms/types-forms";
+import { AvatarButtonEditIcon } from "@/components/Atons/Avatars";
 
 interface IimgObjState { file: File | null, fileName: string, imageName: string }
 type objectControl = { on: boolean, update: boolean }
@@ -42,37 +43,28 @@ export const ContentProfile = () => {
             const formData = new FormData();
             formData.append('file', image.file);
             try {
-                const response = await fetch('/api/upload', { method: 'POST', body: formData });
+                const response = await fetch('/api/usuarios/upload', { method: 'POST', body: formData });
                 const data = await response.json();
-                if (response.status !== 201) {
-                    toast.error('Erro ao fazer upload!');
-                    throw new Error(data.error || 'Erro ao fazer upload!');
+                if (response.status !== 201) { toast.error('Erro ao fazer upload!'); throw new Error(data.error || 'Erro ao fazer upload!'); }
+                const responseAtt = await fetch(`http://localhost:3000/api/usuarios/${usuario.usuarioId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username: dados.username, image: data.fileName, phone: dados.phone, password: dados.password } as IUsuarioUpdate),
+                });
+                if (responseAtt.status === 200) {
+                    const data = await responseAtt.json();
+                    addToUsuarioLogado(data);
+                    // se mudar role temos que -> deslogar, lembrar das permissoes signOut({ callbackUrl: "/" });
+                    toast.success('Alterações salvas, quando você deslogar as mudanças serão aplicadas.');
                 }
+                router.push("/manager");
+
             } catch (error) {
-                toast.error("Erro ao atualizar imagem");
+                toast.error('Erro ao salvar alterações' + String(error));
             }
         }
-        try {
-            const response = await fetch(`http://localhost:3000/api/usuarios/${usuario.usuarioId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username: dados.username, image: image.fileName, phone: dados.phone, password: dados.password } as IUsuarioUpdate),
-            });
-            if (response.status === 200) {
-                const data = await response.json();
-                toast.success('Alterações salvas');
-                addToUsuarioLogado(data);
-                console.log(data);
-                // if mudar role temos que -> deslogar, lembrar das permissoes signOut({ callbackUrl: "/" });
-            } else {
-                toast.error('Erro ao salvar alterações');
-            }
-        } catch (error) {
-            toast.error("Erro ao atualizar dados do usuário");
-        }
-        router.push("/manager");
     };
     const onSubmit: SubmitHandler<IUsuarioUpdate> = (data) => {
         funcSumissaoForm(data);
@@ -84,7 +76,7 @@ export const ContentProfile = () => {
         <div className="flex items-center justify-center min-h-screen bg-slate-50">
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)} className="w-full relative max-w-lg p-8 bg-white shadow-lg text-center rounded-[2.5rem]">
-                    <ButtonEditIcon fnClic={handleModeUpdate} />
+                    <AvatarButtonEditIcon fnClic={handleModeUpdate} />
                     <div className="flex flex-col items-center">
                         <AvatarUpdate preview={image.imageName} modeUpdate={control.update} />
                         <h1 className="mt-4 text-3xl font-extrabold text-teal-700">

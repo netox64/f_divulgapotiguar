@@ -1,5 +1,5 @@
 "use client";
-import { ButtonRounded, PLimited } from "@/components/Atons";
+import { ButtonRounded } from "@/components/Atons";
 import { CardBasic } from "@/components/Cards";
 import { Avalicacao, Imovel, Status } from "@/components/Forms/types-models";
 import { filterImovelStatusPendente } from "@/components/Utils/filters";
@@ -8,7 +8,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 import { toast } from "react-toastify";
 import { GraphLines } from "@/components/Atons/Graph";
-import { H2 } from "@/components/Atons/Texts";
+import { H2, PLimited } from "@/components/Atons/Texts";
 import { IFormImovelUpdate } from "@/components/Forms/types-forms";
 import { useRouter } from "next/navigation";
 
@@ -129,7 +129,7 @@ export const ContentAnalisar = () => {
                     <p className="w-full text-center text-gray-600">Não há imóveis para serem analisados no sistema.</p>
                 )}
             </div>
-            <ButtonRounded label={"Buscar Documento"} color={"green"} action={"submit"} fnClick={buscarAnalisarDocumento} />
+            <ButtonRounded label={"Buscar Documento"} color={"green"} fnClick={buscarAnalisarDocumento} />
 
             <div className="mt-6">
                 <H2 texto={"O documento atrelado ao imóvel"} />
@@ -141,7 +141,7 @@ export const ContentAnalisar = () => {
                     )}
                 </div>
             </div>
-            <ButtonRounded label={"Buscar Analise de texto"} color={"green"} action={"submit"} fnClick={buscarOrientacao} />
+            <ButtonRounded label={"Buscar Analise de texto"} color={"green"} fnClick={buscarOrientacao} />
             <div className="mt-6">
                 <H2 texto={"Os valores referentes ao imóvel que batem com a descrição cadastrada no sistema"} />
                 <div className="mt-2 p-4 bg-gray-50 border rounded-lg shadow-sm">
@@ -158,8 +158,8 @@ export const ContentAnalisar = () => {
                 </div>
             </div>
             <div className="w-full m-5 flex gap-5 items-center justify-center">
-                <ButtonRounded label={"Recusar"} color={"red"} action={"submit"} fnClick={() => handleUpdate("ANALISADO")} />
-                <ButtonRounded label={"Validar"} color={"blue"} action={"submit"} fnClick={() => handleUpdate("INVALIDO")} />
+                <ButtonRounded label={"Recusar"} color={"red"} fnClick={() => handleUpdate("ANALISADO")} />
+                <ButtonRounded label={"Validar"} color={"blue"} fnClick={() => handleUpdate("INVALIDO")} />
             </div>
         </div>
     );

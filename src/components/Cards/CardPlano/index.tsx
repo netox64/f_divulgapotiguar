@@ -7,7 +7,6 @@ export interface ICardPlanoProps {
     planoId: number; nome: string; valor: number; quantAnuncio: number; duracao: number; dataValidade: Date; dataAdquerido: Date; link?: string; textButton?: string
 };
 
-// planoId: number, nome: string, valor: number, quantAnuncio: number, duracao: number, dataValidade: Date, dataAdquerido: Date, pagamento: Pagamento
 export const CardPlano: React.FC<ICardPlanoProps> = ({ planoId, nome, valor, quantAnuncio, duracao, dataValidade, dataAdquerido, link, textButton }) => {
     const router = useRouter();
 
@@ -20,7 +19,7 @@ export const CardPlano: React.FC<ICardPlanoProps> = ({ planoId, nome, valor, qua
                 </p>
                 <h1 className="flex justify-center gap-1 mt-4 font-bold text-slate-800 text-6xl">
                     <span className="text-3xl">R$</span>{valor}
-                    <span className="self-end text-3xl">/ano</span>
+                    <span className="self-end font-light text-sm"> {duracao > 1 ? (`/ válido durante ${duracao} anos`) : (`/ válido durante ${duracao} ano`)}</span>
                 </h1>
             </div>
             <div className="p-0">

@@ -1,7 +1,6 @@
 "use client";
 
-import { PLimited } from "@/components/Atons";
-import { H1 } from "@/components/Atons/Texts";
+import { H1, PLimited } from "@/components/Atons/Texts";
 import { CardBasic } from "@/components/Cards";
 import { Imovel } from "@/components/Forms/types-models";
 import { useGlobalStore } from "@/store";
@@ -62,7 +61,7 @@ export const ContentSubmissao = ({ }) => {
             <div className="w-full flex gap-2 flex-wrap">
                 {imoveis && imoveis?.length > 0 ? (
                     imoveis.map((imovel: Imovel) => (
-                        <CardBasic key={imovel.imovelId} id={imovel.imovelId} title={imovel.nome}
+                        <CardBasic key={imovel.imovelId} id={imovel.imovelId} title={imovel.nome} image={imovel.imagemImovel}
                             checked={imovelSelecionado === imovel.imovelId} fnCheck={handleSelectImovel}>
                             <PLimited texto={imovel.sobre} />
                         </CardBasic>

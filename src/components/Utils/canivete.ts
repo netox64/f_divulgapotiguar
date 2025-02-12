@@ -8,7 +8,7 @@ export default class Canivete {
     }
 
     public static captalizeLimitText(text: string) {
-        return text.length > 150 ? (text.substring(0, 180) + "...") : text;
+        return text.length > 150 ? (text.substring(0, 150) + "...") : text;
     }
 
     public static isString(value: unknown): value is string {

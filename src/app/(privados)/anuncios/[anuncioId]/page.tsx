@@ -3,10 +3,11 @@ import { getAllAnuncios, MessageError } from "@/components/Forms/functions-reque
 import { Anuncio } from "@/components/Forms/types-models";
 import Image from "next/image";
 
-interface Props { params: { anuncioId: number }; };
+interface Props { params: { anuncioId: string }; };
 
 export default async function AnuncioDetails({ params }: Props) {
-    const { anuncioId } = await params;
+    const parametros = await params;
+    const anuncioId = Number(parametros.anuncioId);
     const response = await getAllAnuncios();
     const imoveisfakes = ["imvel#1", "imvel#2", "imvel#3"];
 
@@ -30,13 +31,7 @@ export default async function AnuncioDetails({ params }: Props) {
 
             {/* Imagem do Anúncio */}
             <div className="flex justify-center mb-6">
-                <Image
-                    src={"/imgs/imgs_default.svg"}
-                    width={300}
-                    height={300}
-                    alt={`Imagem do anúncio ${anuncio.title}`}
-                    className="rounded-lg shadow-lg object-cover"
-                />
+                <Image src={"/imgs/imgs_default.svg"} width={300} height={300} alt={`Imagem do anúncio ${anuncio.title}`} className="rounded-lg shadow-lg object-cover" />
             </div>
 
             {/* Informações do Anúncio */}
@@ -94,11 +89,7 @@ export default async function AnuncioDetails({ params }: Props) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
                     {imoveisfakes.map((imovel, index) => (
                         <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-md">
-                            <img
-                                src={"/imgs/imgs_default.svg"}
-                                alt={"alt da imagem"}
-                                className="w-full h-24 object-cover rounded-md"
-                            />
+                            <img src={"/imgs/imgs_default.svg"} alt={"alt da imagem"} className="w-full h-24 object-cover rounded-md"/>
                             <h4 className="text-sm font-semibold mt-2">{"Um Nome"}</h4>
                             <p className="text-xs text-gray-500">R$ {index.toFixed(2)}</p>
                         </div>

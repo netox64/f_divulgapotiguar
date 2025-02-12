@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { LinkedCircle } from '.';
 
 const meta: Meta<typeof LinkedCircle> = {
-    title: "Components/CustomLinks/LinkedCircle",
+    title: "Components/Links/LinkedCircle",
     component: LinkedCircle,
     tags: ["autodocs"],
     parameters: {
