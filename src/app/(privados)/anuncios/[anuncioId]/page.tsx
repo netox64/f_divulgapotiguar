@@ -1,5 +1,5 @@
 import { StarsRating } from "@/components/Atons";
-import { getAllAnuncios, MessageError } from "@/components/Forms/functions-request";
+import { getAllResources, MessageError } from "@/components/Forms/functions-request";
 import { Anuncio } from "@/components/Forms/types-models";
 import Image from "next/image";
 
@@ -8,7 +8,7 @@ interface Props { params: { anuncioId: string }; };
 export default async function AnuncioDetails({ params }: Props) {
     const parametros = await params;
     const anuncioId = Number(parametros.anuncioId);
-    const response = await getAllAnuncios();
+    const response = await getAllResources<Anuncio>("anuncios");
     const imoveisfakes = ["imvel#1", "imvel#2", "imvel#3"];
 
     let anuncio: Anuncio | undefined = undefined;

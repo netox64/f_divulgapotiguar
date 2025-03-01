@@ -1,8 +1,9 @@
 import { Container, ContainerCategory } from "@/components/Containers";
-import { getAllCategorias, MessageError } from "@/components/Forms/functions-request";
+import { getAllResources, MessageError } from "@/components/Forms/functions-request";
+import { Categoria } from "@/components/Forms/types-models";
 
 export default async function Categorias() {
-    const categorias = await getAllCategorias();
+    const categorias = await getAllResources<Categoria>("categorias");
 
     return (
         <div className='w-full min-h-[100vh] flex flex-col'>

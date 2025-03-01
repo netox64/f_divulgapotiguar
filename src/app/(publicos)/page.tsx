@@ -4,13 +4,13 @@ import { H2, Letreiro, PLimited } from "@/components/Atons/Texts";
 import { CardBasic, CardPlano } from "@/components/Cards";
 import { ContainerRedesSociais, ContainerRows } from "@/components/Containers";
 import { SectionOne, SectionThree, SectionTwo } from "@/components/Containers/Sections";
-import { getAllAnuncios, getAllPlanos } from "@/components/Forms/functions-request";
+import { getAllResources } from "@/components/Forms/functions-request";
 import { Anuncio, Plano } from "@/components/Forms/types-models";
 import { filterPlanosNotAdquiridos } from "@/components/Utils/filters";
 
 export default async function Home() {
-    const data = await getAllAnuncios();
-    const planos = await getAllPlanos();
+    const data = await getAllResources<Anuncio>("anuncios");
+    const planos = await getAllResources<Plano>("planos");
     const dataplanos = filterPlanosNotAdquiridos(planos);
 
     return (

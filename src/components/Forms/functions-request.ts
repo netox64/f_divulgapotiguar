@@ -26,9 +26,9 @@ export class MessageError {
 }
 
 // Get all
-export async function getAllAnuncios(): Promise<Anuncio[] | MessageError> {
+export async function getAllResources<T>(endpoint: string): Promise<T[] | MessageError> {
     try {
-        const response = await fetch(URL_FRONTEND + "/anuncios");
+        const response = await fetch(URL_FRONTEND + `/${endpoint}`);
         if (!response.ok) {
             return new MessageError(response.statusText);
         }
@@ -41,121 +41,6 @@ export async function getAllAnuncios(): Promise<Anuncio[] | MessageError> {
     } catch (error: any) {
         return new MessageError(error?.message || "Unknown error occurred");
     }
-}
-export async function getAllCategorias(): Promise<Categoria[] | MessageError> {
-    try {
-        const response = await fetch(URL_BACKEND + "/categorias");
-        if (!response.ok) {
-            return new MessageError(response.statusText);
-        }
-        const contentType = response.headers.get("Content-Type");
-        if (!contentType?.includes("application/json")) {
-            return new MessageError("O servidor não conseguiu retornar uma resposta valida.");
-        }
-        return await response.json();
-    } catch (error: any) {
-        return new MessageError(error?.message || "Unknown error occurred");
-    }
-}
-export async function getAllUsuarios(): Promise<Usuario[] | MessageError> {
-    try {
-        const response = await fetch(URL_FRONTEND + `/usuarios`, { credentials: "include" });
-        if (!response.ok) {
-            return new MessageError(response.statusText);
-        }
-        const contentType = response.headers.get("Content-Type");
-        if (!contentType?.includes("application/json")) {
-            return new MessageError("O servidor não conseguiu retornar uma resposta valida.");
-        }
-        return await response.json();
-    } catch (error: any) {
-        return new MessageError(error?.message || "Unknown error occurred");
-    }
-}
-export async function getAllImoveis(): Promise<Imovel[] | MessageError> {
-    try {
-        const response = await fetch(URL_FRONTEND + "/imoveis", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-            , credentials: "include",
-        });
-        if (!response.ok) {
-            return new MessageError(response.statusText);
-        }
-        const contentType = response.headers.get("Content-Type");
-        if (!contentType?.includes("application/json")) {
-            return new MessageError("O servidor não conseguiu retornar uma resposta valida.");
-        }
-        return await response.json();
-    } catch (error: any) {
-        return new MessageError(error?.message || "Erro desconhecido");
-    }
-}
-export async function getAllPlanos(): Promise<Plano[] | MessageError> {
-    try {
-        const response = await fetch(URL_FRONTEND + "/planos");
-        if (!response.ok) {
-            return new MessageError(response.statusText);
-        }
-        const contentType = response.headers.get("Content-Type");
-        if (!contentType?.includes("application/json")) {
-            return new MessageError("O servidor não conseguiu retornar uma resposta valida.");
-        }
-        return await response.json();
-    } catch (error: any) {
-        return new MessageError(error?.message || "Unknown error occurred");
-    }
-
-}
-export async function getAllPagamentos(): Promise<Pagamento[] | MessageError> {
-    try {
-        const response = await fetch(URL_FRONTEND + "/pagamentos");
-        if (!response.ok) {
-            return new MessageError(response.statusText);
-        }
-        const contentType = response.headers.get("Content-Type");
-        if (!contentType?.includes("application/json")) {
-            return new MessageError("O servidor não conseguiu retornar uma resposta valida.");
-        }
-        return await response.json();
-    } catch (error: any) {
-        return new MessageError(error?.message || "Unknown error occurred");
-    }
-
-}
-export async function getAllNotificacoes(): Promise<Notificacao[] | MessageError> {
-    try {
-        const response = await fetch(URL_FRONTEND + "/notificacoes");
-        if (!response.ok) {
-            return new MessageError(response.statusText);
-        }
-        const contentType = response.headers.get("Content-Type");
-        if (!contentType?.includes("application/json")) {
-            return new MessageError("O servidor não conseguiu retornar uma resposta valida.");
-        }
-        return await response.json();
-    } catch (error: any) {
-        return new MessageError(error?.message || "Unknown error occurred");
-    }
-
-}
-export async function getAllFeedbacks(): Promise<Feedback[] | MessageError> {
-    try {
-        const response = await fetch(URL_FRONTEND + "/feedbacks");
-        if (!response.ok) {
-            return new MessageError(response.statusText);
-        }
-        const contentType = response.headers.get("Content-Type");
-        if (!contentType?.includes("application/json")) {
-            return new MessageError("O servidor não conseguiu retornar uma resposta valida.");
-        }
-        return await response.json();
-    } catch (error: any) {
-        return new MessageError(error?.message || "Unknown error occurred");
-    }
-
 }
 
 // Get one 

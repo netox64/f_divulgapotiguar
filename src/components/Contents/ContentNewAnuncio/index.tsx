@@ -5,7 +5,7 @@ import { CardBasic, CardSelectRoundedPlano } from "@/components/Cards";
 import { useGlobalStore } from "@/store";
 import { FormAnunucio } from "@/components/Forms";
 import { Categoria, Imovel, Plano } from "@/components/Forms/types-models";
-import { getAllCategorias, getServerSideImoveisForUsuarioProps, getServerSidePlanosForUsuarioProps } from "@/components/Forms/functions-request";
+import { getAllResources, getServerSideImoveisForUsuarioProps, getServerSidePlanosForUsuarioProps } from "@/components/Forms/functions-request";
 import { CategoriaSelector } from "@/components/Containers";
 import { PLimited } from "@/components/Atons/Texts";
 
@@ -26,7 +26,7 @@ export const ContentNewAnuncio = () => {
             if (Array.isArray(imoveis)) setImoveis(imoveis);
         };
         const fetchCategorias = async () => {
-            const categorias = await getAllCategorias();
+            const categorias = await getAllResources<Categoria>("categorias");
             if (Array.isArray(categorias)) setCategorias(categorias);
         };
         const fetchPlanos = async () => {

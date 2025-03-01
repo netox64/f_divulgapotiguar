@@ -1,7 +1,7 @@
 "use client";
 
 import * as service from "@/components/Forms/functions-request";
-import { Usuario } from "@/components/Forms/types-models";
+import { Anuncio, Categoria, Feedback, Imovel, Notificacao, Pagamento, Plano, Usuario } from "@/components/Forms/types-models";
 import { useGlobalStore } from "@/store";
 import React, { ReactNode, useEffect } from "react";
 
@@ -29,14 +29,14 @@ export const LoadContext: React.FC<ILoadContextProps> = ({ children }) => {
     const loadData = async () => {
         try {
             const [imoveis, anuncios, categorias, usuarios, planos, pagamentos, notificacoes, feedbacks] = await Promise.all([
-                service.getAllImoveis(),
-                service.getAllAnuncios(),
-                service.getAllCategorias(),
-                service.getAllUsuarios(),
-                service.getAllPlanos(),
-                service.getAllPagamentos(),
-                service.getAllNotificacoes(),
-                service.getAllFeedbacks(),
+                service.getAllResources<Imovel>("imoveis"),
+                service.getAllResources<Anuncio>("anuncios"),
+                service.getAllResources<Categoria>("categorias"),
+                service.getAllResources<Usuario>("usuarios"),
+                service.getAllResources<Plano>("planos"),
+                service.getAllResources<Pagamento>("pagamentos"),
+                service.getAllResources<Notificacao>("notificacoes"),
+                service.getAllResources<Feedback>("feedbacks"),
             ]);
 
             if (Array.isArray(imoveis)) pushImoveis(imoveis);

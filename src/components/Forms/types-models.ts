@@ -2,14 +2,7 @@ type UserRole = "ADMIN" | "USER";
 type Status = "ANUNCIADO" | "ANALISADO" | "PENDENTE" | "INVALIDO";
 type Usuario = {
     usuarioId: string, username: string, image: string, phone: string, totalStars: number, cpf: string, email: string, password: string, role: UserRole,
-    token: string, createdAt: Date,
-    notificacoes: Notificacao[],
-    feedbacks: Feedback[],
-    planos: Plano[],
-    imoveis: Imovel[],
-    anuncios: Anuncio[],
-    authorities: [{ authority: string }],
-    accountNonExpired: true, accountNonLocked: true, credentialsNonExpired: true, enabled: true
+    token: string, createdAt: Date, notificacoes: Notificacao[], feedbacks: Feedback[], planos: Plano[], imoveis: Imovel[], anuncios: Anuncio[], authorities: [{ authority: string }], accountNonExpired: true, accountNonLocked: true, credentialsNonExpired: true, enabled: true
 };
 type Plano = { planoId: number, nome: string, valor: number, quantAnuncio: number, duracao: number, adquirido: boolean, dataValidade: Date, dataAdquerido: Date, pagamento: Pagamento };
 

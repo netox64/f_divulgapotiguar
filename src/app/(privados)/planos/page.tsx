@@ -1,11 +1,11 @@
 import { H2Logado } from "@/components/Atons/Texts/H2Logado";
 import { CardPlanoSeller } from "@/components/Cards";
 import { Container } from "@/components/Containers";
-import { getAllPlanos, MessageError } from "@/components/Forms/functions-request";
+import { getAllResources, MessageError } from "@/components/Forms/functions-request";
 import { Plano } from "@/components/Forms/types-models";
 
 export default async function Planos() {
-    const planos = await getAllPlanos();
+    const planos = await getAllResources<Plano>("planos");
     const planosNaoAdquiridos: Plano[] = !MessageError.isMessageError(planos) ? planos.filter((plano: Plano) => !plano.adquirido) : [];
 
     return (

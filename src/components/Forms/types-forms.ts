@@ -8,13 +8,13 @@ interface IFormAnuncio {
 interface IFormInputPlano { nome: string; valor: number; quantAnuncio: number; duracao: number; adquirido: boolean; usuarioId: string; };
 
 
-//canot have relatioship with usuario, not use usuarioId: string;
+// canot have relatioship with usuario, not use usuarioId: string;
 interface IFormInputCategoria { nome: string; descricao: string; };
 interface IFormRegister { username: string; email: string; phone: string; cpf: string; password: string; }
 
 
 
-//form updates
+// form updates
 interface IUsuarioUpdate {
     username?: string | undefined, iamge?: string, phone?: string | undefined, password: string, role?: string | undefined, token?: string | undefined,
     notificacoes?: (number | undefined)[] | null | undefined, planos?: (number | undefined)[] | null | undefined
