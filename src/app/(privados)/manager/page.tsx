@@ -1,7 +1,9 @@
+import { ContentManager } from "@/components/Contents";
+
 export default function Manager() {
   return (
-    <div className="w-full bg-white">
-        <h2>Bem vindo a pagina de manager</h2>
+    <div className="w-full min-h-[100vh] bg-white">
+      <ContentManager />
     </div>
   );
 }
